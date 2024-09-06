@@ -1,0 +1,33 @@
+.om-fade {
+  width: fit-content;
+  height: fit-content;
+
+  .om-fade-content {
+    --om-fade-transition-duration: 0.5s;
+    --om-fade-transition-function: ease-in-out;
+
+    opacity: 0;
+    transition: all var(--om-fade-transition-duration) var(--om-fade-transition-function);
+
+    &.up {
+      transform: translateY(100%);
+    }
+
+    &.down {
+      transform: translateY(-100%);
+    }
+
+    &.left {
+      transform: translateX(-100%);
+    }
+
+    &.right {
+      transform: translateX(100%);
+    }
+
+    &.show {
+      opacity: 1;
+      transform: unset !important;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@omnedia/ngx-fade",
+  "description": "A simple component library to add a (directional) fade effect to your elements.",
+  "version": "1.0.1",
+  "peerDependencies": {
+    "@angular/common": "^18.2.0",
+    "@angular/core": "^18.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "keywords": [
+    "npm",
+    "animation",
+    "fade",
+    "directional"
+  ],
+  "repository": {
+    "url": "https://github.com/omnedia/ngx-fade"
+  },
+  "author": "Markus Block (markus.block@omnedia.com)",
+  "license": "MIT"
+}
