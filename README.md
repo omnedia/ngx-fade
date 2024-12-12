@@ -1,5 +1,13 @@
 # NgxFadeComponent
 
+<a href="https://ngxui.com" target="_blank" style="display: flex;gap: .5rem;align-items: center;cursor: pointer; padding: 0 0 0 0; height: fit-content;">
+  <img src="https://ngxui.com/assets/img/ngxui-logo.png" style="width: 64px;height: 64px;">
+  <p style="font-weight: bold; padding: 0; margin: 0; font-size: 4rem">NGXUI</p>
+</a>
+
+This Library is part of the NGXUI ecosystem. <br>
+View all available components at https://ngxui.com
+
 The `NgxFadeComponent` is a versatile Angular component that provides a smooth fading and sliding effect for its content as it enters or leaves the viewport. This component uses the IntersectionObserver API to detect when the component is in view and apply the defined transition effects. It's fully customizable with different transition directions, durations, and easing functions.
 
 ## Features
@@ -22,22 +30,26 @@ npm install @omnedia/ngx-fade
 Import the `NgxFadeComponent` in your module or component:
 
 ```typescript
-import { NgxFadeComponent } from '@omnedia/ngx-fade';
+import {NgxFadeComponent} from '@omnedia/ngx-fade';
 
 @Component({
   ...
-  imports: [
-    NgxFadeComponent,
-    ...
-  ],
+    imports:
+[
+  NgxFadeComponent,
   ...
+],
+...
 })
-export class YourComponent {}
+
+export class YourComponent {
+}
 ```
 
 Add the component to your template:
 
 ```html
+
 <om-fade [direction]="'up'" [transitionDuration]="'1s'" [transitionFunction]="'ease-out'">
   <p>Fading content from the bottom</p>
 </om-fade>
@@ -55,6 +67,7 @@ Add the component to your template:
 If you want more control over how the element is transformed, you can use the customTransform input, which allows you to specify any CSS transform, such as rotating or scaling the element. This input overrides the direction setting.
 
 ```html
+
 <om-fade [customTransform]="'rotate(45deg)'" [transitionDuration]="'1s'">
   <p>Custom rotated content</p>
 </om-fade>
@@ -65,8 +78,9 @@ In this example, instead of sliding the content in from a direction, it will app
 ## Example
 
 ```html
+
 <om-fade [direction]="'left'" [transitionDuration]="'2s'" [transitionFunction]="'ease-in'">
-    <h2>Fading In from Left</h2>
+  <h2>Fading In from Left</h2>
 </om-fade>
 <om-fade [customTransform]="'scale(0.5)'" [transitionDuration]="'1.5s'">
   <h2>Custom Scaling Effect</h2>
