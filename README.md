@@ -60,6 +60,7 @@ Add the component to your template:
 - `transitionDuration` (optional): The duration of the transition, specified as a valid CSS duration value (e.g., "1s", "500ms"). Default is "0.5s".
 - `transitionFunction` (optional): The easing function for the transition, specified as a valid CSS transition timing function (e.g., "ease-in-out", "linear"). Default is "ease-in-out".
 - `customTransform` (optional): A custom CSS transform value to override the direction behavior. If set, this custom transform will take precedence over the direction input.
+- `animateOnlyOnce` (optional): A boolean to let the animation run only once. Default `false`.
 
 ## Custom Transforms
 

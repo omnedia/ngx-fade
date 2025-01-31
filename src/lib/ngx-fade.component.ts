@@ -1,32 +1,45 @@
-import {AfterViewInit, Component, ElementRef, Inject, Input, OnDestroy, PLATFORM_ID, ViewChild} from '@angular/core';
-import {CommonModule, isPlatformBrowser} from "@angular/common";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnDestroy,
+  PLATFORM_ID,
+  ViewChild,
+} from "@angular/core";
+import { CommonModule, isPlatformBrowser } from "@angular/common";
 
 @Component({
-  selector: 'om-fade',
+  selector: "om-fade",
   standalone: true,
   imports: [CommonModule],
   templateUrl: "./ngx-fade.component.html",
   styleUrl: "./ngx-fade.component.scss",
 })
 export class NgxFadeComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('OmFadeElement') omFadeElement!: ElementRef<HTMLElement>;
+  @ViewChild("OmFadeElement") omFadeElement!: ElementRef<HTMLElement>;
 
-  @Input('direction')
+  @Input("direction")
   direction?: "up" | "down" | "left" | "right";
 
-  @Input('transitionDuration')
+  @Input("animateOnlyOnce")
+  animateOnlyOnce = false;
+
+  @Input("transitionDuration")
   set transitionDuration(duration: string) {
-    this.style['--om-fade-transition-duration'] = duration;
+    this.style["--om-fade-transition-duration"] = duration;
   }
 
-  @Input('transitionFunction')
+  @Input("transitionFunction")
   set transitionFunction(easeFunction: string) {
-    this.style['--om-fade-transition-function'] = easeFunction;
+    this.style["--om-fade-transition-function"] = easeFunction;
   }
 
-  @Input('customTransform')
+  @Input("customTransform")
   set customTransform(customTransform: string) {
-    this.style['transform'] = `${customTransform}`;
+    this.style["transform"] = `${customTransform}`;
   }
 
   style: any = {};
@@ -34,9 +47,10 @@ export class NgxFadeComponent implements AfterViewInit, OnDestroy {
   inViewport = false;
   intersectionObserver?: IntersectionObserver;
 
-  constructor(@Inject(PLATFORM_ID) private platformId : Object
-  ) {
-  }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private readonly cdr: ChangeDetectorRef,
+  ) {}
 
   ngAfterViewInit() {
     this.initObserver();
@@ -54,7 +68,14 @@ export class NgxFadeComponent implements AfterViewInit, OnDestroy {
     }
 
     this.intersectionObserver = new IntersectionObserver(([entry]) => {
-      this.inViewport = entry.isIntersecting;
+      if (entry.isIntersecting !== this.inViewport) {
+        if (this.animateOnlyOnce && this.inViewport && !entry.isIntersecting) {
+          this.inViewport = true;
+        } else {
+          this.inViewport = entry.isIntersecting;
+          this.cdr.detectChanges();
+        }
+      }
     });
 
     this.intersectionObserver.observe(this.omFadeElement.nativeElement);
