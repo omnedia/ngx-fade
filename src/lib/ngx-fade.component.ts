@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -9,7 +10,7 @@ import {
   PLATFORM_ID,
   ViewChild,
 } from "@angular/core";
-import { CommonModule, isPlatformBrowser } from "@angular/common";
+import {CommonModule, isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: "om-fade",
@@ -17,6 +18,7 @@ import { CommonModule, isPlatformBrowser } from "@angular/common";
   imports: [CommonModule],
   templateUrl: "./ngx-fade.component.html",
   styleUrl: "./ngx-fade.component.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxFadeComponent implements AfterViewInit, OnDestroy {
   @ViewChild("OmFadeElement") omFadeElement!: ElementRef<HTMLElement>;
@@ -50,7 +52,8 @@ export class NgxFadeComponent implements AfterViewInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private readonly cdr: ChangeDetectorRef,
-  ) {}
+  ) {
+  }
 
   ngAfterViewInit() {
     this.initObserver();
